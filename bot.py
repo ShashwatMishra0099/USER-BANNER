@@ -4,41 +4,34 @@ from telegram.ext import Updater, CommandHandler
 # Replace 'YOUR_BOT_TOKEN' with your actual bot token
 TOKEN = '6969784897:AAEOAz_SIZn_SJ5-UgTKb00NbPfiTa_YuE4'
 
+# Define the admin user ID
+ADMIN_ID = 7024083559  # Replace with the actual admin user ID
+
 # Function to handle the /start command
 def start(update, context):
-    # Check if the user is an admin
-    if update.message.from_user.id in context.bot.get_chat_administrators(update.message.chat_id):
+    user_id = update.message.from_user.id
+    if user_id == ADMIN_ID:
         context.bot.send_message(chat_id=update.message.chat_id, text="Bot started. Only admins can use /ban100.")
     else:
         context.bot.send_message(chat_id=update.message.chat_id, text="Only admins can start the bot.")
 
 # Function to handle the /ban100 command
 def ban(update, context):
-    # Check if the user is an admin
-    if update.message.from_user.id not in context.bot.get_chat_administrators(update.message.chat_id):
+    user_id = update.message.from_user.id
+    if user_id != ADMIN_ID:
         context.bot.send_message(chat_id=update.message.chat_id, text="Only admins can use this command.")
         return
     
-    # Get list of members in the group
-    members = context.bot.get_chat_members_count(update.message.chat_id)
-    
-    # Generate random usernames and ban commands
-    banned_users = random.sample(range(members), min(100, members))
-    for user_id in banned_users:
-        context.bot.send_message(chat_id=update.message.chat_id, text=f"/ban {user_id}")
+    # Rest of the ban logic...
 
 def main():
-    # Initialize the Updater with the bot token
-    updater = Updater(TOKEN, use_context=True)  # use_context=True for newer versions
+    updater = Updater(TOKEN, use_context=True)
 
-    # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
 
-    # Register command handlers
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('ban100', ban))
 
-    # Start the Bot
     updater.start_polling()
     updater.idle()
 
