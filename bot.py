@@ -25,7 +25,7 @@ def ban(update, context):
     # Rest of the ban logic...
 
 def main():
-    updater = Updater(TOKEN, use_context=True)
+    updater = Updater(TOKEN)
 
     dispatcher = updater.dispatcher
 
