@@ -1,5 +1,6 @@
 import telegram
 from telegram.ext import Updater, CommandHandler
+from queue import Queue
 
 # Replace 'YOUR_BOT_TOKEN' with your actual bot token
 TOKEN = '6969784897:AAEOAz_SIZn_SJ5-UgTKb00NbPfiTa_YuE4'
@@ -25,8 +26,12 @@ def ban(update, context):
     # Rest of the ban logic...
 
 def main():
-    updater = Updater(TOKEN)
-
+    # Create an update queue
+    update_queue = Queue()
+    
+    # Initialize the Updater with the bot token and update queue
+    updater = Updater(TOKEN, update_queue)
+    
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler('start', start))
