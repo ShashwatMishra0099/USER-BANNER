@@ -1,4 +1,3 @@
-import random
 import telegram
 from telegram.ext import Updater, CommandHandler
 
@@ -29,13 +28,17 @@ def ban(update, context):
         context.bot.send_message(chat_id=update.message.chat_id, text=f"/ban {user_id}")
 
 def main():
-    updater = Updater(TOKEN)
+    # Initialize the Updater with the bot token
+    updater = Updater(TOKEN, use_context=True)  # use_context=True for newer versions
+
+    # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
 
-    # Add command handlers
+    # Register command handlers
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('ban100', ban))
 
+    # Start the Bot
     updater.start_polling()
     updater.idle()
 
