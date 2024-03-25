@@ -29,7 +29,7 @@ def ban(update, context):
         context.bot.send_message(chat_id=update.message.chat_id, text=f"/ban {user_id}")
 
 def main():
-    updater = Updater(token=TOKEN, use_context=True)
+    updater = Updater(TOKEN, use_context=True)
     dispatcher = updater.dispatcher
 
     # Add command handlers
@@ -38,6 +38,7 @@ def main():
 
     updater.start_polling()
     updater.idle()
+
 
 if __name__ == '__main__':
     main()
