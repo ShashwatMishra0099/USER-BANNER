@@ -1,6 +1,5 @@
 import random
 from telegram.ext import Updater, CommandHandler
-from telegram import ChatAction
 
 # Replace 'YOUR_BOT_TOKEN' with your actual bot token
 TOKEN = '6969784897:AAEOAz_SIZn_SJ5-UgTKb00NbPfiTa_YuE4'
@@ -34,7 +33,7 @@ def ban(update, context):
         return
 
     # Start typing
-    context.bot.send_chat_action(chat_id=update.message.chat_id, action=ChatAction.TYPING)
+    context.bot.send_chat_action(chat_id=update.message.chat_id, action=telegram.ChatAction.TYPING)
 
     # Get list of members in the group
     members = context.bot.get_chat_members(update.message.chat_id)
