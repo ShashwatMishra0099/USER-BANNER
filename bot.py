@@ -48,7 +48,7 @@ def ban(update, context):
             context.bot.send_message(chat_id=update.message.chat_id, text="No members found in the group.")
 
 def main():
-    updater = Updater(token=TOKEN, use_context=True)
+    updater = Updater(TOKEN, use_context=True)
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler('start', start))
